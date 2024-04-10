@@ -13,7 +13,7 @@ export default function Rsvp({ onGuestReply }) {
     const [gAttend, setgAttend] = useState("");
     const [gQty, setgQty] = useState(1);
 
-    //!!!!!!!!!!!!!!!!!!!DUMMY DATA!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!!!!DUMMY DATA!!!!!!!!!!!!!!!!!!!!!!!!!
     const eName = "Jia's Birthday Bash";
     const eDate = new Date(2024, 11, 9);
     const eTime = "7:00 PM";
