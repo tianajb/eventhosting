@@ -5,8 +5,6 @@ import SPage from "./eventhosting/page";
 import { useUserAuth } from "./_utils/auth-context";
 
 
-
-
 export default function Page() {
     // Use the useUserAuth hook to get the user object and the login and logout functions
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
@@ -48,7 +46,8 @@ export default function Page() {
             ) :
                 (
                     <div className="my-3">
-                        <p>Welcome, Please sign in</p>
+
+                        <p className="text-black text-md my-5">Welcome, Please sign in</p>
                         <button id="sign in"
                             onClick={() => signIn()}
                             className="bg-emerald-700 hover:bg-emerald-500

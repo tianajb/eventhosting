@@ -26,4 +26,3 @@ export const addGuest = async (userId, guest) => {
         console.error("Error adding guest: ", error);
     }
 };
-

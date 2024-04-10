@@ -6,12 +6,12 @@ import { useUserAuth } from "../_utils/auth-context";
 export default function Rsvp({ onGuestReply }) {
 
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
-
+    const [gAttend, setgAttend] = useState("");
+    const [gQty, setgQty] = useState(1);
     var gName = user.displayName;
     var gEmail = user.email;
 
-    const [gAttend, setgAttend] = useState("");
-    const [gQty, setgQty] = useState(1);
+
 
     //!!!!!!!!!!!!!!!!!!!DUMMY DATA!!!!!!!!!!!!!!!!!!!!!!!!!
     const eName = "Jia's Birthday Bash";

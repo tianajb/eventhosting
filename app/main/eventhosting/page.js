@@ -1,11 +1,11 @@
 "use client";
+import RSVPPage from "./rsvp";
+
 import { useEffect, useState } from "react";
 
 import { useUserAuth } from "../_utils/auth-context";
 import Link from "next/link";
-import RSVPPage from "./rsvp";
 
-//import MPage from "./page";
 import { getGuests, addGuest } from "../_services/eventhosting-service";
 
 
@@ -14,11 +14,19 @@ export default function Page() {
 
    const [guests, setGuests] = useState([]);
 
+
    const handleGuestReply = (guest) => {
       addGuest(user.uid, guest);
-      setGuests([...guests, guest]);
 
-      console.log("Guests: ", guests);
+      try {
+         if (guests.length > 0) {
+            setGuests(prevGuests => [...prevGuests, guest]);
+         }
+      }
+      catch (error) {
+         console.error("Error adding guest/s: ", error);
+      }
+
    };
 
    useEffect(() => {
