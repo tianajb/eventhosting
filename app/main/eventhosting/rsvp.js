@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../_utils/auth-context";
 
-export default function rsvp({ onGuestReply }) {
+export default function Rsvp({ onGuestReply }) {
 
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
@@ -73,7 +73,7 @@ export default function rsvp({ onGuestReply }) {
                                         </td>
                                         <td className="px-4 py-2">
                                             <input type="text" id="gName" value={user.displayName}
-                                                className="p-2 m-1 rounded-md w-80 bg-slate-100" required />
+                                                className="p-2 m-1 rounded-md w-80 bg-slate-100" required readOnly />
                                         </td>
                                     </tr>
 
@@ -83,7 +83,7 @@ export default function rsvp({ onGuestReply }) {
                                         </td>
                                         <td className="px-4 py-2">
                                             <input type="text" id="gEmail" value={user.email}
-                                                className="p-2 m-1 rounded-md w-80  bg-slate-100" required />
+                                                className="p-2 m-1 rounded-md w-80  bg-slate-100" required readOnly />
                                         </td>
                                     </tr>
                                     <tr>
