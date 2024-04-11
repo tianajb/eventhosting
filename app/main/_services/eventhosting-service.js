@@ -5,8 +5,7 @@ import { useEffect } from "react";
 export const getGuests = async (userId) => {
     try {
         const guests = [];
-        //const q = query(collection(db, `users/${userId}/guests`));
-        const q = query(collection(db, `guests`));
+        const q = query(collection(db, `users/${userId}/guests`));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             guests.push({ id: doc.id, ...doc.data() });
@@ -20,8 +19,7 @@ export const getGuests = async (userId) => {
 
 export const addGuest = async (userId, guest) => {
     try {
-        //const docRef = await addDoc(collection(db, `users/${userId}/guests`), guest);
-        const docRef = await addDoc(collection(db, `guests`), guest);
+        const docRef = await addDoc(collection(db, `users/${userId}/guests`), guest);
         return docRef.id;
     }
     catch (error) {
@@ -32,8 +30,7 @@ export const addGuest = async (userId, guest) => {
 export const updateGuest = async (userId, guestEmail, updatedGuest) => {
     try {
         // Query the guest documents based on the guest email
-        //const querySnapshot = await getDocs(query(collection(db, `users/${userId}/guests`), where("email", "==", guestEmail)));
-        const querySnapshot = await getDocs(query(collection(db, `guests`), where("email", "==", guestEmail)));
+        const querySnapshot = await getDocs(query(collection(db, `users/${userId}/guests`), where("email", "==", guestEmail)));
 
         // Check if there are matching guest documents
         if (!querySnapshot.empty) {

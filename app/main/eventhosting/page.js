@@ -25,7 +25,7 @@ export default function Page() {
             alert("Response updated successfully")
          }
          catch (error) {
-            console.error("Error updating guest/s: ", error);
+            console.error("Error updating response: ", error);
          }
       }
       // If the guest is not in the list, add the guest
@@ -48,13 +48,14 @@ export default function Page() {
       if (user) {
          loadGuests();
       }
-   }, [user, guests]);
+   }, [user, setGuests]);
 
 
    const loadGuests = async () => {
       try {
          const guests = await getGuests(user.uid);
          setGuests(guests);
+         console.log("Guests: ", guests);
       }
       catch (error) {
          console.error("Error loading guest/s: ", error);

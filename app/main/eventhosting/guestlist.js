@@ -1,5 +1,4 @@
 "use client"
-import Guest from "./guest";
 import { useState } from "react";
 
 
@@ -7,11 +6,15 @@ export default function GuestList({ guests }) {
 
     var totalGuests = 0;
 
-    guests.forEach(guest => {
-        if (guest.attendance === "Yes") {
-            totalGuests += guest.qty;
-        }
-    });
+    //count total guests
+    if (guests && Array.isArray(guests) && guests.length > 0) {
+        guests.map((guest) => {
+            if (guest.attendance === "Yes") {
+                totalGuests += guest.qty;
+            }
+        });
+    }
+
 
     return (
         <main className="m-4">
@@ -29,16 +32,31 @@ export default function GuestList({ guests }) {
                             Total guests: {totalGuests}
                         </div>
                     </div>
-                    <ul>
-                        {guests.map((guest) => (
-                            <li key={guest.id} className="w-80">
-                                <Guest name={guest.name} attendance={guest.attendance} qty={guest.qty} />
-                            </li>
+                    <div>
+                        <table className="table-auto">
+                            <thead>
+                                <tr>
+                                    <th className="px-4 py-2">Name</th>
+                                    <th className="px-4 py-2">Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {guests && Array.isArray(guests) && guests.map((guest) => (
+                                    guest.attendance === "Yes" ? (
+                                        <tr key={guest.id}>
+                                            <td className="px-4 py-2 w-48">{guest.name}</td>
+                                            <td className="px-4 py-2">{guest.qty} guest/s</td>
+                                        </tr>
+                                    ) : null
+                                ))}
+                            </tbody>
+                        </table>
 
-                        ))}
-                    </ul>
+                    </div>
+
                 </div>
             </div>
+
 
 
 
