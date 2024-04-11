@@ -54,6 +54,7 @@ export default function Page() {
    const loadGuests = async () => {
       try {
          const guests = await getGuests(user.uid);
+         //const guests = await getGuests();
          setGuests(guests);
          console.log("Guests: ", guests);
       }

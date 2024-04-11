@@ -7,10 +7,14 @@ export default function GuestList({ guests }) {
     var totalGuests = 0;
 
     //count total guests
+
     if (guests && Array.isArray(guests) && guests.length > 0) {
+        totalGuests = 0;
+        console.log("guestlists: ", guests);
         guests.map((guest) => {
+            console.log("guest qty: ", totalGuests, "+=", guest.qty);
             if (guest.attendance === "Yes") {
-                totalGuests += guest.qty;
+                totalGuests += parseInt(guest.qty, 10); // Force guest.qty to be an integer
             }
         });
     }

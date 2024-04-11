@@ -2,10 +2,13 @@ import { db } from "../_utils/firebase";
 import { collection, getDocs, addDoc, query, where, updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 
+
+
 export const getGuests = async (userId) => {
     try {
         const guests = [];
-        const q = query(collection(db, `users/${userId}/guests`));
+        //const q = query(collection(db, `users/${userId}/guests`));
+        const q = query(collection(db, `guests`));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             guests.push({ id: doc.id, ...doc.data() });
@@ -19,8 +22,10 @@ export const getGuests = async (userId) => {
 
 export const addGuest = async (userId, guest) => {
     try {
-        const docRef = await addDoc(collection(db, `users/${userId}/guests`), guest);
+        //const docRef = await addDoc(collection(db, `users/${userId}/guests`), guest);
+        const docRef = await addDoc(collection(db, `guests`), guest);
         return docRef.id;
+        console.log("Guest added successfully");
     }
     catch (error) {
         console.error("Error adding guest: ", error);
@@ -30,8 +35,8 @@ export const addGuest = async (userId, guest) => {
 export const updateGuest = async (userId, guestEmail, updatedGuest) => {
     try {
         // Query the guest documents based on the guest email
-        const querySnapshot = await getDocs(query(collection(db, `users/${userId}/guests`), where("email", "==", guestEmail)));
-
+        //const querySnapshot = await getDocs(query(collection(db, `users/${userId}/guests`), where("email", "==", guestEmail)));
+        const querySnapshot = await getDocs(query(collection(db, `guests`), where("email", "==", guestEmail)));
         // Check if there are matching guest documents
         if (!querySnapshot.empty) {
             // Get the reference to the first matching document
@@ -39,6 +44,7 @@ export const updateGuest = async (userId, guestEmail, updatedGuest) => {
             // Update the first matching guest document with the new data
             await updateDoc(docRef, updatedGuest);
             return "Guest updated successfully";
+            console.log("Guest updated successfully");
         } else {
             // If no matching guest documents are found
             console.error("No matching guest found with email: ", guestEmail);
