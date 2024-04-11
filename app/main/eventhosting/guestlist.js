@@ -10,9 +10,7 @@ export default function GuestList({ guests }) {
 
     if (guests && Array.isArray(guests) && guests.length > 0) {
         totalGuests = 0;
-        console.log("guestlists: ", guests);
         guests.map((guest) => {
-            console.log("guest qty: ", totalGuests, "+=", guest.qty);
             if (guest.attendance === "Yes") {
                 totalGuests += parseInt(guest.qty, 10); // Force guest.qty to be an integer
             }
@@ -40,8 +38,8 @@ export default function GuestList({ guests }) {
                         <table className="table-auto">
                             <thead>
                                 <tr>
-                                    <th className="px-4 py-2">Name</th>
-                                    <th className="px-4 py-2">Qty</th>
+                                    <th className="px-4 py-2 w-56">Name</th>
+                                    <th className="px-4 py-2 w-48">Qty</th>
                                 </tr>
                             </thead>
                             <tbody>

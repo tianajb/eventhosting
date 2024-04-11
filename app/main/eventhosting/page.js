@@ -71,7 +71,7 @@ export default function Page() {
                <div className="my-3 mx-3 flex w-auto border-solid border-2 bg-stone-200">
                   <RSVPPage onGuestReply={handleGuestReply} />
                </div>
-               <div className="my-3 mx-3  bg-stone-200 text-black">
+               <div className="my-3 mx-3 flex w-auto border-solid border-2 bg-stone-200">
                   <GuestList guests={guests} />
 
                </div>
