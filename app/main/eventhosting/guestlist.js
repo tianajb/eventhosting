@@ -31,7 +31,10 @@ export default function GuestList({ guests }) {
                     </div>
                     <ul>
                         {guests.map((guest) => (
-                            <Guest name={guest.name} attendance={guest.attendance} qty={guest.qty} />
+                            <li key={guest.id} className="w-80">
+                                <Guest name={guest.name} attendance={guest.attendance} qty={guest.qty} />
+                            </li>
+
                         ))}
                     </ul>
                 </div>
