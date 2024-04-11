@@ -15,6 +15,7 @@ export default function GuestList({ guests }) {
                 totalGuests += parseInt(guest.qty, 10); // Force guest.qty to be an integer
             }
         });
+        guests.sort((a, b) => a.name.localeCompare(b.name));
     }
 
 

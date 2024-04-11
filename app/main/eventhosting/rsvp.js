@@ -2,7 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../_utils/auth-context";
-
+import events from "./events.json";
 export default function Rsvp({ onGuestReply }) {
 
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
@@ -11,15 +11,11 @@ export default function Rsvp({ onGuestReply }) {
     var gName = user.displayName;
     var gEmail = user.email;
 
-
-
-    //!!!!!!!!!!!!!!!!!!!DUMMY DATA!!!!!!!!!!!!!!!!!!!!!!!!!
-    const eName = "Jia's Birthday Bash";
-    const eDate = new Date(2024, 11, 9);
-    const eTime = "7:00 PM";
-    const eVenue = "Jia's Crib";
-    const eDetails = "We're excited to celebrate Jia's special day with you!";
-    //!!!!!!!!!!!!!!!!!!!DUMMY DATA!!!!!!!!!!!!!!!!!!!!!!!!!!
+    const eName = events[0].name;
+    const eDetails = events[0].details;
+    const eDate = new Date(events[0].date);
+    const eTime = events[0].time;
+    const eVenue = events[0].venue;
 
     const currentDate = new Date();
     const formattedDate = eDate.toLocaleDateString('en-US', {
