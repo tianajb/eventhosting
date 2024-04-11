@@ -5,7 +5,8 @@ import { useEffect } from "react";
 export const getGuests = async (userId) => {
     try {
         const guests = [];
-        const q = query(collection(db, `users/${userId}/guests`));
+        //const q = query(collection(db, `users/${userId}/guests`));
+        const q = query(collection(db, `guests`));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             guests.push({ id: doc.id, ...doc.data() });
@@ -19,7 +20,8 @@ export const getGuests = async (userId) => {
 
 export const addGuest = async (userId, guest) => {
     try {
-        const docRef = await addDoc(collection(db, `users/${userId}/guests`), guest);
+        //const docRef = await addDoc(collection(db, `users/${userId}/guests`), guest);
+        const docRef = await addDoc(collection(db, `guests`), guest);
         return docRef.id;
     }
     catch (error) {
@@ -27,27 +29,11 @@ export const addGuest = async (userId, guest) => {
     }
 };
 
-// export const updateGuest = async (userId, guestEmail, updatedGuest) => {
-//     try {
-//         const guestsCollectionRef = collection(db, `users/${userId}/guests`);
-//         const q = query(guestsCollectionRef, where("email", "==", guestEmail));
-//         const querySnapshot = await getDocs(q);
-
-//         querySnapshot.forEach((doc) => {
-//             updateDoc(doc.ref, updatedGuest);
-//         });
-
-//         return "Guest updated successfully";
-//     }
-//     catch (error) {
-//         console.error("Error updating guest: ", error);
-//         return null;
-//     }
-// };
 export const updateGuest = async (userId, guestEmail, updatedGuest) => {
     try {
         // Query the guest documents based on the guest email
-        const querySnapshot = await getDocs(query(collection(db, `users/${userId}/guests`), where("email", "==", guestEmail)));
+        //const querySnapshot = await getDocs(query(collection(db, `users/${userId}/guests`), where("email", "==", guestEmail)));
+        const querySnapshot = await getDocs(query(collection(db, `guests`), where("email", "==", guestEmail)));
 
         // Check if there are matching guest documents
         if (!querySnapshot.empty) {
