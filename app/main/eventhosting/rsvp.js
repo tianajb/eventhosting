@@ -43,11 +43,14 @@ export default function Rsvp({ onGuestReply }) {
         <div>
             {/* start of rsvp form */}
             <form onSubmit={handleSubmit}>
-                <div className="bg-stone-200 text-black p-5">
+                <div className="bg-stone-100 text-black p-10 m-5">
                     <div className="text-center text-slate-800">
                         <div className="px-4 py-2">
-                            <label htmlFor="eName" className="text-3xl font-sans font-medium">{eName}</label><br></br>
-                            <label htmlFor="eDetails" className="text-slate-800 italic"> {eDetails}</label><br></br>
+                            <div>
+                                <label htmlFor="eName" className="text-3xl font-sans font-medium">{eName}</label>
+                            </div>
+                            <div>
+                                <label htmlFor="eDetails" className="text-slate-800 italic"> {eDetails}</label></div>
                         </div>
                         <div>
                             <label htmlFor="eDate">{formattedDate} </label><br></br>

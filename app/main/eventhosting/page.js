@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import Link from "next/link";
 
-import { getGuests, addGuest } from "../_services/eventhosting-service";
-
+import { getGuests, addGuest, updateGuest } from "../_services/eventhosting-service";
+import GuestList from "./guestlist";
 
 export default function Page() {
    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
@@ -16,15 +16,30 @@ export default function Page() {
 
 
    const handleGuestReply = (guest) => {
-      addGuest(user.uid, guest);
 
-      try {
-         if (guests.length > 0) {
-            setGuests(prevGuests => [...prevGuests, guest]);
+      // Check if the guest is already in the list
+      if (guests.some(g => g.email === guest.email)) {
+         updateGuest(user.uid, guest.email, guest);
+         try {
+            setGuests(prevGuests => prevGuests.map(g => g.email === guest.email ? guest : g));
+            alert("Response updated successfully")
+         }
+         catch (error) {
+            console.error("Error updating guest/s: ", error);
          }
       }
-      catch (error) {
-         console.error("Error adding guest/s: ", error);
+      // If the guest is not in the list, add the guest
+      else {
+         addGuest(user.uid, guest);
+         try {
+            if (guests.length > 0) {
+               setGuests(prevGuests => [...prevGuests, guest]);
+            }
+            alert("Response sent successfully")
+         }
+         catch (error) {
+            console.error("Error adding guest/s: ", error);
+         }
       }
 
    };
@@ -33,7 +48,8 @@ export default function Page() {
       if (user) {
          loadGuests();
       }
-   }, [user]);
+   }, [user, guests]);
+
 
    const loadGuests = async () => {
       try {
@@ -41,7 +57,7 @@ export default function Page() {
          setGuests(guests);
       }
       catch (error) {
-         console.error("Error adding guest/s: ", error);
+         console.error("Error loading guest/s: ", error);
       }
    };
 
@@ -49,9 +65,13 @@ export default function Page() {
    return (
       <main className="m-4" >
          {user ? (
-            <div>
-               <div className="my-3 flex w-auto border-solid border-2">
+            <div className="flex flex-row">
+               <div className="my-3 mx-3 flex w-auto border-solid border-2 bg-stone-200">
                   <RSVPPage onGuestReply={handleGuestReply} />
+               </div>
+               <div className="my-3 mx-3  bg-stone-200 text-black">
+                  <GuestList guests={guests} />
+
                </div>
             </div >
 
